@@ -19,7 +19,7 @@ char	*get_next_line(int fd)
 	size_t		len;
 	int			reading;
 
-	line = malloc(BUFFER_SIZE);
+	line = malloc(BUFFER_SIZE + 1);
 	if (!line)
 		return (NULL);
 	reading = read(fd, line, BUFFER_SIZE);
@@ -28,5 +28,6 @@ char	*get_next_line(int fd)
 		free(line);
 		return (NULL);
 	}
+	line[reading + 1] = '\0';
 	return (line);
 }
