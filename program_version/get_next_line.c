@@ -20,7 +20,7 @@ char	*get_next_line(int fd)
 		ssize_t *reading;
 	
 		line = ft_extract_buffer(fd, &reading);
-		if (!line)
+		if (line == NULL)
 			return (NULL);
 		
 		return (line);
