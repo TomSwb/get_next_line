@@ -46,13 +46,9 @@ I use VSCodium on purpose to not have AI integration, this means except my copy-
 - `ChatGPT:`
 	1. ...
 
-## Detailed description
+## Detailed description:
 
-#### Capacities:
-
-...
-
-#### Bonus options:
+#### Why this algorithm:
 
 ...
 
