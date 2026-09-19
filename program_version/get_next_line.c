@@ -17,8 +17,9 @@ char	*get_next_line(int fd)
 		char		*line;
 		static char	*lftvr; 
 		size_t		len;
+		size_t *reading;
 	
-		line = ft_extract_buffer(fd);
+		line = ft_extract_buffer(fd, &reading);
 		if (!line)
 			return (NULL);
 		
