@@ -36,8 +36,8 @@ size_t ft_setlen(char *lftvr, size_t *reading, char *buffer)
 	
 	if (lftvr != NULL)
 	  len = ft_strlen(lftvr);
-		if (reading != BUFFER_SIZE)
-	  len += reading;
+		if (*reading < BUFFER_SIZE)
+	  len += *reading;
   else
   {
 	  if (ft_strchr(buffer, '\n');
@@ -50,7 +50,7 @@ size_t ft_setlen(char *lftvr, size_t *reading, char *buffer)
     }
    }
    else
-     len += reading;
+     len += *reading;
   }
 		return (len);
 }
