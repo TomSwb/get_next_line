@@ -33,6 +33,10 @@
 
 // ** Functions ** //
 
+// get_next_line.c
 char	*get_next_line(int fd);
+
+// get-next_line_utils.c
+char	*ft_extract_buffer(int fd);
 
 #endif
