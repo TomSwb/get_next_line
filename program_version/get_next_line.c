@@ -18,14 +18,14 @@ char	*get_next_line(int fd)
 		char  *line;
 		static char	*lftvr = NULL; 
 		ssize_t *reading;
-  size_t len;
+        size_t len;
 	
 		buffer = ft_extract_buffer(fd, &reading);
 		if (buffer == NULL)
 			return (NULL);
-  len = ft_setlen(lftvr, &reading, buffer);
+        len = ft_setlen(lftvr, &reading, buffer);
 		line = malloc(len + 1);
 		if (!line)
 			return (NULL);
-  return (line);
+        return (line);
 }
