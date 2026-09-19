@@ -14,17 +14,17 @@
 
 char	*ft_extract_buffer(int fd, ssize_t *reading)
 {
-	char		*line;
+	char		*buffer;
 
-	line = malloc(BUFFER_SIZE + 1);
-	if (!line)
+	buffer = malloc(BUFFER_SIZE + 1);
+	if (!buffer)
 		return (NULL);
-	*reading = read(fd, line, BUFFER_SIZE);
+	*reading = read(fd, buffer, BUFFER_SIZE);
 	if (*reading == -1)
 	{
-		free(line);
+		free(buffer);
 		return (NULL);
 	}
-	line[*reading] = '\0';
-	return (line);
+	buffer[*reading] = '\0';
+	return (buffer);
 }
