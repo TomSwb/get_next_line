@@ -16,7 +16,7 @@ char	*get_next_line(int fd)
 {
 		char		*buffer;
 		char  *line;
-		static char	*lftvr; 
+		static char	*lftvr = NULL; 
 		ssize_t *reading;
 	
 		buffer = ft_extract_buffer(fd, &reading);
