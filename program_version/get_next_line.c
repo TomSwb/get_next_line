@@ -16,12 +16,25 @@ char	*get_next_line(int fd)
 {
 		char		*line;
 		static char	*lftvr; 
-		size_t		len;
+		ssize_t		i;
+		size_t j;
 		ssize_t *reading;
 	
 		line = ft_extract_buffer(fd, &reading);
 		if (line == NULL)
 			return (NULL);
-		
+		i = 0;
+		while (i < reading || line[i] != '\n')
+			i++;
+		j = 0;
+		if (i != reading)
+		{
+			while (i < reading)
+			{
+				lftvr[j] = line[i];
+				i++;
+				j++;
+			}
+		}
 		return (line);
 }
