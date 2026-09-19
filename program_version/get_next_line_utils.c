@@ -12,7 +12,7 @@
 
 #include 'get_next_line.h'
 
-char	*ft_extract_buffer(int fd)
+char	*ft_extract_buffer(int fd, size_t *reading)
 {
 	char		*line;
 	int			reading;
@@ -20,12 +20,12 @@ char	*ft_extract_buffer(int fd)
 	line = malloc(BUFFER_SIZE + 1);
 	if (!line)
 		return (NULL);
-	reading = read(fd, line, BUFFER_SIZE);
-	if (reading == -1)
+	(*reading) = read(fd, line, BUFFER_SIZE);
+	if ((*reading) == -1)
 	{
 		free(line);
 		return (NULL);
 	}
-	line[reading + 1] = '\0';
+	line[(*reading) + 1] = '\0';
 	return (line);
 }
