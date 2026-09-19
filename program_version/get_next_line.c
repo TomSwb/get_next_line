@@ -27,7 +27,14 @@ char	*get_next_line(int fd)
 		while (i < reading || line[i] != '\n')
 			i++;
 		j = 0;
-		if (i != reading)
+		
+		return (line);
+}
+
+if (lftvr != NULL)
+	append line to lftvr
+
+if (i != reading)
 		{
 			while (i < reading)
 			{
@@ -36,5 +43,3 @@ char	*get_next_line(int fd)
 				j++;
 			}
 		}
-		return (line);
-}
