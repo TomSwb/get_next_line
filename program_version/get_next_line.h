@@ -22,6 +22,9 @@
 // malloc();
 // free();
 
+# include <stddef.h>
+// size_t
+
 // ** BUFFER_SIZE handling ** //
 
 # ifndef BUFFER_SIZE
