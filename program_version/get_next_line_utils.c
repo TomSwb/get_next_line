@@ -29,6 +29,7 @@ char	*ft_extract_buffer(int fd, ssize_t *reading)
 	return (buffer);
 }
 
+/*
 size_t ft_setlen(char *lftvr, size_t *reading, char *buffer)
 {
 	size_t len;
@@ -53,4 +54,4 @@ size_t ft_setlen(char *lftvr, size_t *reading, char *buffer)
 			len += *reading;
 	}
 	return (len);
-}
+}*/
