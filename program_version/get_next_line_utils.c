@@ -12,19 +12,38 @@
 
 #include 'get_next_line.h'
 
-char	*ft_extract_buffer(int fd, ssize_t *reading)
+char	*ft_extract_buffer(int fd, char *data)
 {
 	char		*buffer;
+    size_t reading;
+    size_t i;
+    size_t j;
 
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
-	*reading = read(fd, buffer, BUFFER_SIZE);
-	if (*reading == -1)
+	reading = read(fd, buffer, BUFFER_SIZE);
+	if (reading == -1)
 	{
 		free(buffer);
 		return (NULL);
 	}
-	buffer[*reading] = '\0';
+	buffer[reading] = '\0';
+    i = ft_strlen(data);
+    j = 0;
+    while (buffer[j])
+    {
+        data[i + j] = buffer[j];
+        j++;
+    }
 	return (buffer);
+}
+
+size_t ft_strlen(char *s)
+{
+    size_t len;
+    
+    while (s[len])
+        len++;
+    return (len);
 }
