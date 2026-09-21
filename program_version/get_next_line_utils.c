@@ -28,30 +28,3 @@ char	*ft_extract_buffer(int fd, ssize_t *reading)
 	buffer[*reading] = '\0';
 	return (buffer);
 }
-
-/*
-size_t ft_setlen(char *lftvr, size_t *reading, char *buffer)
-{
-	size_t len;
-	size_t i;
-	
-	if (lftvr != NULL)
-		len = ft_strlen(lftvr);
-	if (*reading < BUFFER_SIZE)
-		len += *reading;
-	else
-	{
-		if (ft_strchr(buffer, '\n');
-		{
-			i = 0;
-			while (buffer[i] != '\n')
-			{
-				len++;
-				i++;
-			}
-		}
-		else
-			len += *reading;
-	}
-	return (len);
-}*/
