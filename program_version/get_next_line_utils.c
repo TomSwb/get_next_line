@@ -12,7 +12,7 @@
 
 #include 'get_next_line.h'
 
-int *ft_extract_buffer(int fd, char *data)
+int ft_extract_buffer(int fd, char *data)
 {
 	char		*buffer;
     size_t reading;
