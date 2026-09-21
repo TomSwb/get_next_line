@@ -19,8 +19,7 @@ char	*get_next_line(int fd)
 		ssize_t		reading;
 		
 
-		while (!ft_next_line(&reading, &line, &data))
-            data = ft_extract_buffer(fd, &reading);
+		data = ft_extract_buffer(fd, &reading);
 
 		
 		return (line);
