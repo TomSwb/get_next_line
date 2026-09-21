@@ -12,7 +12,7 @@
 
 #include 'get_next_line.h'
 
-char	*ft_extract_buffer(int fd, char *data)
+int *ft_extract_buffer(int fd, char *data)
 {
 	char		*buffer;
     size_t reading;
@@ -21,12 +21,12 @@ char	*ft_extract_buffer(int fd, char *data)
 
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
-		return (NULL);
+		return (0);
 	reading = read(fd, buffer, BUFFER_SIZE);
 	if (reading == -1)
 	{
 		free(buffer);
-		return (NULL);
+		return (0);
 	}
 	buffer[reading] = '\0';
     i = ft_strlen(data);
@@ -36,7 +36,7 @@ char	*ft_extract_buffer(int fd, char *data)
         data[i + j] = buffer[j];
         j++;
     }
-	return (buffer);
+	return (1);
 }
 
 size_t ft_strlen(char *s)
