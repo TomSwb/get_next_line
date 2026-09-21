@@ -37,7 +37,7 @@
 char	*get_next_line(int fd);
 
 // get-next_line_utils.c
-char	*ft_extract_buffer(int fd, char *data);
+int	ft_extract_buffer(int fd, char *data);
 size_t ft_strlen(char *s);
 
 #endif
