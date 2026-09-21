@@ -14,16 +14,12 @@
 
 char	*get_next_line(int fd)
 {
+		static char	*data;
 		char		*buffer;
 		char		*line;
-		static char	*data = NULL; 
 		ssize_t		*reading;
-		size_t		len;
+		
 
-        if (data != NULL)
-        {
-            
-        }
 		buffer = ft_extract_buffer(fd, &reading);
 		if (buffer == NULL)
 			return (NULL);
