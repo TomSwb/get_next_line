@@ -18,13 +18,10 @@ char	*get_next_line(int fd)
 		char		*line;
 		ssize_t		reading;
 		
-        if (data != NULL)
+        if (data != NULL && ft_strchr(data, '\n') != 0)
         {
-            if (ft_strchr(data, '\n') != 0)
-            {
-                ft_extract_line(line, data);
-                return (line);
-            }
+            ft_extract_line(line, data);
+            return (line);
         }
 		data = ft_extract_buffer(fd, &reading);
 
