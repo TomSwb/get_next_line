@@ -21,12 +21,12 @@ int ft_extract_buffer(int fd, char *data)
 
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
-		return (0);
+		return (1);
 	reading = read(fd, buffer, BUFFER_SIZE);
 	if (reading == -1)
 	{
 		free(buffer);
-		return (0);
+		return (1);
 	}
 	buffer[reading] = '\0';
     i = ft_strlen(data);
@@ -36,7 +36,7 @@ int ft_extract_buffer(int fd, char *data)
         data[i + j] = buffer[j];
         j++;
     }
-	return (1);
+	return (0);
 }
 
 size_t ft_strlen(char *s)
