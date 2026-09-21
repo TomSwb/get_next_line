@@ -18,7 +18,8 @@ char	*get_next_line(int fd)
 		char		*line;
 		ssize_t		reading;
 		
-        if (data != NULL && ft_strchr(data, '\n') != 0)
+        if (data != NULL && (ft_strchr(data, '\n') != 0 
+            || ft_strlen(data) < BUFFER_SIZE)
         {
             ft_extract_line(line, data);
             return (line);
