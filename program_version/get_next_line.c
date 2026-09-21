@@ -20,6 +20,10 @@ char	*get_next_line(int fd)
 		ssize_t		*reading;
 		size_t		len;
 
+        if (data != NULL)
+        {
+            
+        }
 		buffer = ft_extract_buffer(fd, &reading);
 		if (buffer == NULL)
 			return (NULL);
