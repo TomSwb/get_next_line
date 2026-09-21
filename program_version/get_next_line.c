@@ -25,7 +25,7 @@ char	*get_next_line(int fd)
         }
         while (ft_strchr(data, '\n') != 0 
                 || ft_strlen(data) < BUFFER_SIZE)
-            data = ft_extract_buffer(data, fd);
+            data = ft_extract_buffer(fd, data);
         ft_extract_line(&line, data);
 		return (line);
 }
