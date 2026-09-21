@@ -20,12 +20,12 @@ char	*get_next_line(int fd)
         if (data != NULL && (ft_strchr(data, '\n') != 0 
             || ft_strlen(data) < BUFFER_SIZE))
         {
-            ft_extract_line(line, data);
+            ft_extract_line(&line, data);
             return (line);
         }
         while (ft_strchr(data, '\n') != 0 
                 || ft_strlen(data) < BUFFER_SIZE)
             data = ft_extract_buffer(data, fd);
-        ft_extract_line(line, data);
+        ft_extract_line(&line, data);
 		return (line);
 }
