@@ -15,17 +15,13 @@
 char	*get_next_line(int fd)
 {
 		static char	*data;
-		char		*buffer;
 		char		*line;
 		ssize_t		reading;
 		
 
-		buffer = ft_extract_buffer(fd, &reading);
-		if (buffer == NULL)
-			return (NULL);
+		while (!ft_next_line(&reading, &line, &data))
+            data = ft_extract_buffer(fd, &reading);
 
-		line = malloc(len + 1);
-		if (!line)
-			return (NULL);
+		
 		return (line);
 }
