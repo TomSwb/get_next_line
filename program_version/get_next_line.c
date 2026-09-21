@@ -16,16 +16,16 @@ char	*get_next_line(int fd)
 {
 		static char	*data;
 		char		*line;
-		ssize_t		reading;
-		
+
         if (data != NULL && (ft_strchr(data, '\n') != 0 
-            || ft_strlen(data) < BUFFER_SIZE)
+            || ft_strlen(data) < BUFFER_SIZE))
         {
             ft_extract_line(line, data);
             return (line);
         }
-		data = ft_extract_buffer(fd, &reading);
-
-		
+        while (ft_strchr(data, '\n') != 0 
+                || ft_strlen(data) < BUFFER_SIZE)
+            data = ft_strcat_buffer(data, fd);
+        ft_extract_line(line, data);
 		return (line);
 }
