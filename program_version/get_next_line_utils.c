@@ -81,9 +81,9 @@ ssize_t ft_extract_buffer(int fd, char *data)
 	return (reading);
 }
 
-char *ft_freedata(char *data)
+char *ft_freedata(char **data)
 {
-	free(data);
-	data = NULL;
+	free(*data);
+	*data = NULL;
 	return (NULL);
 }
