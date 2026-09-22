@@ -14,21 +14,29 @@
 
 char	*get_next_line(int fd)
 {
-		static char	*data;
-		char		*line;
+	static char	*data;
+	char		*line;
+	ssize_t		reading;
 
-        if (data != NULL && (ft_strchr(data, '\n') 
-            || ft_strlen(data) < BUFFER_SIZE))
-        {
-            if (ft_extract_line(&line, &data);
-                return (NULL);
-            return (line);
-        }
-        while (ft_strchr(data, '\n') != 0 
-                || ft_strlen(data) < BUFFER_SIZE)
-            if (ft_extract_buffer(fd, &data))
-                return (NULL);
-        if (ft_extract_line(&line, &data);
-            return (NULL);
-		return (line);
+	while (data == NULL || !ft_strchr(data, '\n'))
+	{
+		reading = ft_extract_buffer(fd, &data);
+		if (reading < 0)
+		{
+			free(data);
+			data = NULL;
+			return (NULL);
+		}
+		if (reading == 0)
+			break;
+	}
+	if (data == NULL)
+		return (NULL);
+	if (ft_extract_line(&line, &data))
+	{
+		free(data);
+		data = NULL;
+		return (NULL);
+	}
+	return (line);
 }
