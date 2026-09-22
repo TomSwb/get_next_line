@@ -37,7 +37,7 @@ void	stdin_gnl(void)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		len = ft_strchr(line, '\0');
+		len = find_c_index(line, '\0');
 		write(0, line, len);
 		free(line);
 		line = get_next_line(fd);
