@@ -118,26 +118,26 @@ I use VSCodium on purpose to not have AI integration. This means that, except fo
 
 #### Why this algorithm:
 
-I began by learning what a static variable is. I understood it is a variable that stays in memory between function calls, until the program ends or is exited. I had, however, not understood that I needed to allocate its content. My first extract_buffer was therefore not compliant but already had the structure it has now.
+I began by learning what a static variable is. I understood it is a variable that stays in memory between function calls, until the program ends or is exited. I had, however, not understood that I needed to allocate its content. My first extract_buffer() was therefore not compliant but already had the structure it has now.
 
 I found it important that get_next_line be mainly responsible for managing the overall operation and the freeing of data if required. This also helped me understand memory ownership more clearly, by deciding which function is responsible for each allocation and where that memory should be freed. Then it became clear I needed a way to extract the buffer into the static variable to be able to work with it and find a line in it, as well as save the leftover for the next call.
 
 I therefore needed two main things: a buffer extractor and a line extractor.
 
-`ft_extract_buffer:`
+`extract_buffer:`
 
-The function begins by checking if a positive BUFFER_SIZE was given. It then allocates the buffer and reads up to BUFFER_SIZE bytes into it. The buffer is then '\0' terminated so it can be handled as a string. ft_strcat will either copy the buffer into data if data == NULL, or concatenate it to the existing data.
+The function begins by checking if a positive BUFFER_SIZE was given. It then allocates the buffer and reads up to BUFFER_SIZE bytes into it. The buffer is then '\0' terminated so it can be handled as a string. cat_buffer_data() will either copy the buffer into data if data == NULL, or concatenate it to the existing data.
 
-get_next_line will call ft_extract_buffer as many times as needed, until either data contains a '\n', indicating the end of a line, or reading == 0, which indicates the end of the file.
+get_next_line() will call extract_buffer() as many times as needed, until either data contains a '\n', indicating the end of a line, or reading == 0, which indicates the end of the file.
 
-If this whole operation works as planned and either EOF or '\n' is detected, get_next_line can then proceed by calling ft_extract_line.
+If this whole operation works as planned and either EOF or '\n' is detected, get_next_line() can then proceed by calling extract_line.
 
-`ft_extract_line:`
+`extract_line:`
 
 The extraction will first determine the length needed for the line, using either '\n' or, if not found, '\0' as the end-of-line point, and allocate the required memory.
 
-Once the allocation is done, it copies 'len' characters from data to line. It then calls ft_clean_data.
+Once the allocation is done, it copies 'len' characters from data to line. It then calls clean_data().
 
-`ft_clean_data:`
+`clean_data:`
 
 This function moves the bytes remaining after the extracted line to the front of the data allocation. If no bytes remain except '\0', data is no longer needed and can be freed and reset to NULL.
