@@ -17,7 +17,7 @@ char	*get_next_line(int fd)
 		static char	*data;
 		char		*line;
 
-        if (data != NULL && (ft_strchr(data, '\n') != 0 
+        if (data != NULL && (ft_strchr(data, '\n') 
             || ft_strlen(data) < BUFFER_SIZE))
         {
             if (ft_extract_line(&line, &data);
