@@ -15,6 +15,9 @@
 
 void	stdin_gnl(void);
 void	many_files_gnl(char **av);
+int *allocate_fds(char **av, size_t *i);
+int check_fds(int *fds, size_t len);
+void process_fd_line(int *fds, size_t i);
 
 int	main(int ac, char **av)
 {
