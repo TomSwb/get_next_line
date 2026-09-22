@@ -56,13 +56,9 @@ void	one_file_gnl(char **av)
 	if (fd == -1)
 		return ;
 	line = get_next_line(fd);
-	i = 1;
 	while (line != NULL)
 	{
 		len = find_c_index(line, '\0');
-		write(1,"Line ", 5);
-		write(1, &i + 48, 1);
-		write(1, ": ", 2);
 		write(1, line, len);
 		free(line);
 		read(0, &c, 1);
@@ -91,5 +87,22 @@ void	many_files_gnl(char **av)
 		i++;
 	}
 	fds[i - 1] = -1;
+	while (check_fds(fds, i) == 1)
+	{
+	...
+	}
+}
+
+int check_fds(int *fds, size_t len)
+{
+	size_t i;
 	
+	i = 0;
+	while (i < len)
+	{
+		if (fds[i] != -1)
+			return (1);
+		i++;
+	}
+	return (0);
 }
