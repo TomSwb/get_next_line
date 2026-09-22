@@ -22,21 +22,13 @@ char	*get_next_line(int fd)
 	{
 		reading = ft_extract_buffer(fd, &data);
 		if (reading < 0)
-		{
-			free(data);
-			data = NULL;
-			return (NULL);
-		}
+			return (ft_freedata(&data));
 		if (reading == 0)
 			break;
 	}
 	if (data == NULL)
 		return (NULL);
 	if (ft_extract_line(&line, &data))
-	{
-		free(data);
-		data = NULL;
-		return (NULL);
-	}
+		return (ft_freedata(&data));
 	return (line);
 }
