@@ -35,6 +35,25 @@ size_t ft_strlen(char *s)
     return (len);
 }
 
+int	ft_extract_line(char *line, char *data)
+{
+	size_t len;
+	size_t	i;
+
+	len = ft_strchr(data, '\n');
+	line = malloc(len + 1);
+	if (!line)
+		return (1);
+	i = 0;
+	while (i < len)
+	{
+		line[i] = data[i];
+		i++;
+	}
+	line[len + 1] = '\0';
+	return (0);
+}
+
 int ft_extract_buffer(int fd, char *data)
 {
 	char		*buffer;
