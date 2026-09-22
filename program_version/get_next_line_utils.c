@@ -12,6 +12,29 @@
 
 #include 'get_next_line.h'
 
+int	ft_strchr(char *s, int c)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if ((uncigned char)s[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+size_t ft_strlen(char *s)
+{
+    size_t len;
+    
+    while (s[len])
+        len++;
+    return (len);
+}
+
 int ft_extract_buffer(int fd, char *data)
 {
 	char		*buffer;
@@ -37,13 +60,4 @@ int ft_extract_buffer(int fd, char *data)
         j++;
     }
 	return (0);
-}
-
-size_t ft_strlen(char *s)
-{
-    size_t len;
-    
-    while (s[len])
-        len++;
-    return (len);
 }
