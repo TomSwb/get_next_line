@@ -6,7 +6,7 @@
 /*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:53:07 by tomswb            #+#    #+#             */
-/*   Updated: 2026/09/22 16:41:24 by tomswb           ###   ########.fr       */
+/*   Updated: 2026/09/22 15:48:27 by tomswb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
  
 # include <unistd.h>
 // read();
-// write();
-// close();
 
 # include <stdlib.h>
 // malloc();

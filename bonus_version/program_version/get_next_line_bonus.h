@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:53:07 by tomswb            #+#    #+#             */
-/*   Updated: 2026/09/22 16:41:24 by tomswb           ###   ########.fr       */
+/*   Updated: 2026/09/22 17:06:27 by tomswb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 // ** Libraries ** //
  
 # include <unistd.h>
 // read();
-// write();
-// close();
 
 # include <stdlib.h>
 // malloc();
@@ -32,6 +30,15 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
 # endif
+
+// ** Struct ** //
+
+typedef struct s_list 
+{
+	int				fd;
+	char			*data;
+	struct s_list	*next;
+}	t_list;
 
 // ** Functions ** //
 

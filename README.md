@@ -75,6 +75,15 @@ Press Enter to see the next line. If using the bonus version with multiple files
 
 Either reach the end of the file(s) or press CTRL + C to end the program.
 
+
+Either version can be used with stdin:
+
+```bash
+./a.out
+```
+
+After launching program, writes some text then press enter, it will print you text again.
+
 ## Resources
 
 #### Editor:
