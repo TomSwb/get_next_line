@@ -6,13 +6,13 @@
 /*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:56:40 by tomswb            #+#    #+#             */
-/*   Updated: 2026/09/22 15:48:19 by tomswb           ###   ########.fr       */
+/*   Updated: 2026/09/22 17:37:39 by tomswb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-ssize_t	ft_strchr(char *s, int c)
+ssize_t	find_c_index(char *s, int c)
 {
 	size_t	i;
 
@@ -30,7 +30,7 @@ ssize_t	ft_strchr(char *s, int c)
 	return (-1);
 }
 
-ssize_t ft_extract_buffer(int fd, char **data)
+ssize_t extract_buffer(int fd, char **data)
 {
 	char	*buffer;
 	ssize_t	reading;
@@ -48,7 +48,7 @@ ssize_t ft_extract_buffer(int fd, char **data)
 		return (reading);
 	}
 	buffer[reading] = '\0';
-	temp = ft_strcat(buffer, data);
+	temp = cat_buffer_data(buffer, data);
 	free(buffer);
 	if (temp == NULL)
 		return (-1);
@@ -56,13 +56,13 @@ ssize_t ft_extract_buffer(int fd, char **data)
 	return (reading);
 }
 
-char	*ft_strcat(char *buffer, char **data)
+char	*cat_buffer_data(char *buffer, char **data)
 {
 	char	*temp;
     size_t i;
     size_t j;
 
-	temp = malloc(ft_strchr(buffer, '\0') + ft_strchr(*data, '\0') + 1);
+	temp = malloc(find_c_index(buffer, '\0') + find_c_index(*data, '\0') + 1);
 	if (!temp)
 		return (NULL);
 	i = 0;
@@ -85,14 +85,14 @@ char	*ft_strcat(char *buffer, char **data)
 	return (temp);
 }
 
-int	ft_extract_line(char **line, char **data)
+int	extract_line(char **line, char **data)
 {
 	ssize_t len;
 	ssize_t	i;
 
-	len = ft_strchr(*data, '\n');
+	len = find_c_index(*data, '\n');
 	if (len == -1)
-		len = ft_strchr(*data, '\0');
+		len = find_c_index(*data, '\0');
 	else
 	 	len += 1;
 	(*line) = malloc(len + 1);
@@ -105,17 +105,17 @@ int	ft_extract_line(char **line, char **data)
 		i++;
 	}
 	(*line)[i] = '\0';
-	ft_clean_data(data, len);
+	clean_data(data, len);
 	return (0);
 }
 
-void	ft_clean_data(char **data, ssize_t len)
+void	clean_data(char **data, ssize_t len)
 {
 	ssize_t	i;
 	ssize_t	n;
 
 	i = 0;
-	n = ft_strchr((*data) + len, '\0') + 1;
+	n = find_c_index((*data) + len, '\0') + 1;
 	while (i < n)
 	{
 		(*data)[i] = (*data)[len + i];

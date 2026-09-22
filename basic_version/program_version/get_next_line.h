@@ -6,7 +6,7 @@
 /*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:53:07 by tomswb            #+#    #+#             */
-/*   Updated: 2026/09/22 16:41:24 by tomswb           ###   ########.fr       */
+/*   Updated: 2026/09/22 17:37:45 by tomswb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
  
 # include <unistd.h>
 // read();
-// write();
-// close();
 
 # include <stdlib.h>
 // malloc();
@@ -39,10 +37,10 @@
 char	*get_next_line(int fd);
 
 // get-next_line_utils.c
-ssize_t	ft_strchr(char *s, int c);
-ssize_t	ft_extract_buffer(int fd, char **data);
-char	*ft_strcat(char *buffer, char **data);
-int		ft_extract_line(char **line, char **data);
-void	ft_clean_data(char **data, ssize_t len);
+ssize_t	find_c_index(char *s, int c);
+ssize_t	extract_buffer(int fd, char **data);
+char	*cat_buffer_data(char *buffer, char **data);
+int		extract_line(char **line, char **data);
+void	clean_data(char **data, ssize_t len);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:56:37 by tomswb            #+#    #+#             */
-/*   Updated: 2026/09/22 14:27:33 by tomswb           ###   ########.fr       */
+/*   Updated: 2026/09/22 17:37:53 by tomswb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ char	*get_next_line(int fd)
 	char		*line;
 	ssize_t		reading;
 
-	while (data == NULL || ft_strchr(data, '\n') < 0)
+	while (data == NULL || find_c_index(data, '\n') < 0)
 	{
-		reading = ft_extract_buffer(fd, &data);
+		reading = extract_buffer(fd, &data);
 		if (reading < 0)
 		{
 			free(data);
@@ -32,7 +32,7 @@ char	*get_next_line(int fd)
 	}
 	if (data == NULL)
 		return (NULL);
-	if (ft_extract_line(&line, &data))
+	if (extract_line(&line, &data))
 	{
 		free(data);
 		data = NULL;

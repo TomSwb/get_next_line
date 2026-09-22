@@ -6,7 +6,7 @@
 /*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:56:31 by tomswb            #+#    #+#             */
-/*   Updated: 2026/09/22 17:01:39 by tomswb           ###   ########.fr       */
+/*   Updated: 2026/09/22 17:41:29 by tomswb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_stdin_gnl(void)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		len = ft_strchr(line, '\0');
+		len = find_c_index(line, '\0');
 		write(0, line, len);
 		free(line);
 		line = get_next_line(fd);
@@ -56,7 +56,7 @@ void	ft_stdfile_gnl(char **av)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		len = ft_strchr(line, '\0');
+		len = find_c_index(line, '\0');
 		write(1, line, len);
 		free(line);
 		read(0, &c, 1);
