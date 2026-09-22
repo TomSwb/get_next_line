@@ -54,10 +54,10 @@ int	ft_extract_line(char *line, char *data)
 	return (0);
 }
 
-int ft_extract_buffer(int fd, char *data)
+ssize_t ft_extract_buffer(int fd, char *data)
 {
 	char		*buffer;
-    size_t reading;
+    ssize_t reading;
     size_t i;
     size_t j;
 
@@ -68,7 +68,7 @@ int ft_extract_buffer(int fd, char *data)
 	if (reading == -1)
 	{
 		free(buffer);
-		return (1);
+		return (reading);
 	}
 	buffer[reading] = '\0';
     i = ft_strlen(data);
@@ -78,5 +78,5 @@ int ft_extract_buffer(int fd, char *data)
         data[i + j] = buffer[j];
         j++;
     }
-	return (0);
+	return (reading);
 }
