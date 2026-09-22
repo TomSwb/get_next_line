@@ -72,32 +72,32 @@ void	one_file_gnl(char **av)
 void	many_files_gnl(char **av)
 {
 	int *fds;
+	size_t len;
 	
-	fds = allocate_fds(av);
-	while (check_fds(fds, i) == 1)
+	fds = allocate_fds(av, &len);
+	while (check_fds(fds, len) == 1)
 	{
 	...
 	}
 }
 
-int *allocate_fds(char **av)
+int *allocate_fds(char **av, size_t *i)
 {
 	int *fds;
-	size_t i;
 	
-	i = 1;
-	while (av[i])
-		i++;
-	fds = malloc(sizeof(int) * i);
+	*i = 1;
+	while (av[*i])
+		(*i)++;
+	fds = malloc(sizeof(int) * *i);
 	if (!fds)
 		return (NULL);
-	i = 1;
-	while (av[i])
+	*i = 1;
+	while (av[*i])
 	{
-		fds[i - 1] = open(av[i], O_RDONLY);
-		i++;
+		fds[(*i) - 1] = open(av[*i], O_RDONLY);
+		(*i)++;
 	}
-	fds[i - 1] = -1;
+	fds[(*i) - 1] = -1;
 	return (fds);
 }
 
