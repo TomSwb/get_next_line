@@ -14,16 +14,17 @@
 #include <fcntl.h>
 
 void	ft_stdin_gnl(void);
-void	ft_stdfile_gnl(char **av);
+void	ft_one_file_gnl(char **av);
+void	ft_many_files_gnl(char **av);
 
 int	main(int ac, char **av)
 {
-	if (ac > 2)
-		return (-1);
 	if (ac == 1)
 		ft_stdin_gnl();
+	else if (ac == 2)
+		ft_one_file_gnl(av);
 	else
-		ft_stdfile_gnl(av);
+		ft_many_files_gnl(av);
 }
 
 void	ft_stdin_gnl(void)
@@ -65,4 +66,9 @@ void	ft_stdfile_gnl(char **av)
 		line = get_next_line(fd);
 	}
 	close(fd);
+}
+
+void	ft_many_files_gnl(char **av)
+{
+	...
 }
