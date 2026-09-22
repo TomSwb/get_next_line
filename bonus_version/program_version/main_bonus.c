@@ -14,15 +14,12 @@
 #include <fcntl.h>
 
 void	stdin_gnl(void);
-void	one_file_gnl(char **av);
 void	many_files_gnl(char **av);
 
 int	main(int ac, char **av)
 {
 	if (ac == 1)
 		stdin_gnl();
-	else if (ac == 2)
-		one_file_gnl(av);
 	else
 		many_files_gnl(av);
 }
@@ -44,39 +41,11 @@ void	stdin_gnl(void)
 	}
 }
 
-void	one_file_gnl(char **av)
-{
-	int		fd;
-	char	*line;
-	size_t	len;
-	char	c;
-	size_t i;
-
-	fd = open(av[1], O_RDONLY);
-	if (fd == -1)
-		return ;
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		len = find_c_index(line, '\0');
-		write(1, line, len);
-		free(line);
-		read(0, &c, 1);
-		while (c != '\n')
-			read(0, &c, 1);
-		line = get_next_line(fd);
-	}
-	close(fd);
-}
-
 void	many_files_gnl(char **av)
 {
 	int *fds;
-	char *line;
-	char c;
 	size_t len;
 	size_t i;
-	size_t line_len;
 	
 	fds = allocate_fds(av, &len);
 	if (!fds)
@@ -87,24 +56,7 @@ void	many_files_gnl(char **av)
 		i = 0;
 		while (i < len)
 		{
-			if (fds[i] != -1)
-			{
-				line = get_next_line(fds[i]);
-				if (line != NULL)
-				{
-					line_len = find_c_index(line, '\0');
-					write(1, line, line_len);
-					free(line);
-					read(0, &c, 1);
-					while (c != '\n')
-						read(0, &c, 1);
-				}
-				else
-				{
-					close(fds[i]);
-					fds[i] = -1;
-				}
-			}
+			process_fd_line(fds, i);
 			i++;
 		}
 	}
@@ -143,4 +95,30 @@ int check_fds(int *fds, size_t len)
 		i++;
 	}
 	return (0);
+}
+
+void process_fd_line(int *fds, size_t i)
+{
+	char *line;
+	char c;
+	size_t line_len;
+	
+	if (fds[i] != -1)
+	{
+		line = get_next_line(fds[i]);
+		if (line != NULL)
+		{
+			line_len = find_c_index(line, '\0');
+			write(1, line, line_len);
+			free(line);
+			read(0, &c, 1);
+			while (c != '\n')
+				read(0, &c, 1);
+		}
+		else
+		{
+			close(fds[i]);
+			fds[i] = -1;
+		}
+	}
 }
