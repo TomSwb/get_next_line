@@ -6,7 +6,7 @@
 /*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:53:07 by tomswb            #+#    #+#             */
-/*   Updated: 2026/09/19 17:40:40 by tomswb           ###   ########.fr       */
+/*   Updated: 2026/09/22 15:48:27 by tomswb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@
 char	*get_next_line(int fd);
 
 // get-next_line_utils.c
-int	ft_extract_buffer(int fd, char *data);
-size_t ft_strlen(char *s);
+ssize_t	ft_strchr(char *s, int c);
+ssize_t	ft_extract_buffer(int fd, char **data);
+char	*ft_strcat(char *buffer, char **data);
+int		ft_extract_line(char **line, char **data);
+void	ft_clean_data(char **data, ssize_t len);
 
 #endif

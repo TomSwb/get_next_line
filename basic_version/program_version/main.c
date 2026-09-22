@@ -6,15 +6,12 @@
 /*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:56:31 by tomswb            #+#    #+#             */
-/*   Updated: 2026/09/19 17:09:46 by tomswb           ###   ########.fr       */
+/*   Updated: 2026/09/22 15:15:51 by tomswb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <fcntl.h>
-#include <stddef.h>
-
-static size_t	ft_strlen(char *s);
 
 int	main(int ac, char **av)
 {
@@ -33,7 +30,7 @@ int	main(int ac, char **av)
 		line = get_next_line(fd);
 		while (line != NULL)
 		{
-			len = ft_strlen(line);
+			len = ft_strchr(line, '\0');
 			write(1, line, len);
 			free(line);
 			read(0, &c, 1);
@@ -43,14 +40,4 @@ int	main(int ac, char **av)
 		}
 		close(fd);
 	}
-}
-
-static size_t	ft_strlen(char *s)
-{
-	size_t	len;
-
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
 }

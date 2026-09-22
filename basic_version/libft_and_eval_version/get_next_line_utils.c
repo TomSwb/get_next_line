@@ -1,0 +1,129 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/19 15:56:40 by tomswb            #+#    #+#             */
+/*   Updated: 2026/09/22 15:48:19 by tomswb           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line.h"
+
+ssize_t	ft_strchr(char *s, int c)
+{
+	size_t	i;
+
+	i = 0;
+	if (s == NULL)
+		return (0);
+	while (s[i])
+	{
+		if ((unsigned char)s[i] == c)
+			return (i);
+		i++;
+	}
+	if (c == '\0')
+		return (i);
+	return (-1);
+}
+
+ssize_t ft_extract_buffer(int fd, char **data)
+{
+	char	*buffer;
+	ssize_t	reading;
+	char	*temp;
+
+	if (BUFFER_SIZE <= 0)
+		return (-1);
+	buffer = malloc(BUFFER_SIZE + 1);
+	if (!buffer)
+		return (-1);
+	reading = read(fd, buffer, BUFFER_SIZE);
+	if (reading <= 0)
+	{
+		free(buffer);
+		return (reading);
+	}
+	buffer[reading] = '\0';
+	temp = ft_strcat(buffer, data);
+	free(buffer);
+	if (temp == NULL)
+		return (-1);
+	*data = temp;
+	return (reading);
+}
+
+char	*ft_strcat(char *buffer, char **data)
+{
+	char	*temp;
+    size_t i;
+    size_t j;
+
+	temp = malloc(ft_strchr(buffer, '\0') + ft_strchr(*data, '\0') + 1);
+	if (!temp)
+		return (NULL);
+	i = 0;
+	if (*data != NULL)
+	{
+		while ((*data)[i])
+		{
+			temp[i] = (*data)[i];
+			i++;
+		}
+	}
+	j = 0;
+	while (buffer[j])
+	{
+		temp[i + j] = buffer[j];
+		j++;
+	}
+	temp[i + j] = '\0';
+	free(*data);
+	return (temp);
+}
+
+int	ft_extract_line(char **line, char **data)
+{
+	ssize_t len;
+	ssize_t	i;
+
+	len = ft_strchr(*data, '\n');
+	if (len == -1)
+		len = ft_strchr(*data, '\0');
+	else
+	 	len += 1;
+	(*line) = malloc(len + 1);
+	if (!(*line))
+		return (1);
+	i = 0;
+	while (i < len)
+	{
+		(*line)[i] = (*data)[i];
+		i++;
+	}
+	(*line)[i] = '\0';
+	ft_clean_data(data, len);
+	return (0);
+}
+
+void	ft_clean_data(char **data, ssize_t len)
+{
+	ssize_t	i;
+	ssize_t	n;
+
+	i = 0;
+	n = ft_strchr((*data) + len, '\0') + 1;
+	while (i < n)
+	{
+		(*data)[i] = (*data)[len + i];
+		i++;
+	}
+	if ((*data)[0] == '\0')
+	{
+		free(*data);
+		*data = NULL;
+	}
+}
