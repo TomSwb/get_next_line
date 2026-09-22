@@ -13,21 +13,21 @@
 #include "get_next_line_bonus.h"
 #include <fcntl.h>
 
-void	ft_stdin_gnl(void);
-void	ft_one_file_gnl(char **av);
-void	ft_many_files_gnl(char **av);
+void	stdin_gnl(void);
+void	one_file_gnl(char **av);
+void	many_files_gnl(char **av);
 
 int	main(int ac, char **av)
 {
 	if (ac == 1)
-		ft_stdin_gnl();
+		stdin_gnl();
 	else if (ac == 2)
-		ft_one_file_gnl(av);
+		one_file_gnl(av);
 	else
-		ft_many_files_gnl(av);
+		many_files_gnl(av);
 }
 
-void	ft_stdin_gnl(void)
+void	stdin_gnl(void)
 {
 	int		fd;
 	char	*line;
@@ -44,20 +44,25 @@ void	ft_stdin_gnl(void)
 	}
 }
 
-void	ft_stdfile_gnl(char **av)
+void	one_file_gnl(char **av)
 {
 	int		fd;
 	char	*line;
 	size_t	len;
 	char	c;
+	size_t i;
 
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		return ;
 	line = get_next_line(fd);
+	i = 1;
 	while (line != NULL)
 	{
-		len = ft_strchr(line, '\0');
+		len = find_c_index(line, '\0');
+		write(1,"Line ", 5);
+		write(1, &i + 48, 1);
+		write(1, ": ", 2);
 		write(1, line, len);
 		free(line);
 		read(0, &c, 1);
@@ -68,7 +73,23 @@ void	ft_stdfile_gnl(char **av)
 	close(fd);
 }
 
-void	ft_many_files_gnl(char **av)
+void	many_files_gnl(char **av)
 {
-	...
+	int *fds;
+	size_t i;
+	
+	i = 1;
+	while (av[i])
+		i++;
+	fds = malloc(sizeof(int) * i);
+	if (!fds)
+		return ;
+	i = 1;
+	while (av[i])
+	{
+		fds[i - 1] = open(av[i], O_RDONLY);
+		i++;
+	}
+	fds[i - 1] = -1;
+	
 }
