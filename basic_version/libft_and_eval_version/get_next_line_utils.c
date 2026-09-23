@@ -6,7 +6,7 @@
 /*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:56:40 by tomswb            #+#    #+#             */
-/*   Updated: 2026/09/22 17:37:39 by tomswb           ###   ########.fr       */
+/*   Updated: 2026/09/23 16:40:15 by tomswb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ ssize_t	find_c_index(char *s, int c)
 	return (-1);
 }
 
-ssize_t extract_buffer(int fd, char **data)
+ssize_t	extract_buffer(int fd, char **data)
 {
 	char	*buffer;
 	ssize_t	reading;
@@ -59,8 +59,8 @@ ssize_t extract_buffer(int fd, char **data)
 char	*cat_buffer_data(char *buffer, char **data)
 {
 	char	*temp;
-    size_t i;
-    size_t j;
+	size_t	i;
+	size_t	j;
 
 	temp = malloc(find_c_index(buffer, '\0') + find_c_index(*data, '\0') + 1);
 	if (!temp)
@@ -87,14 +87,14 @@ char	*cat_buffer_data(char *buffer, char **data)
 
 int	extract_line(char **line, char **data)
 {
-	ssize_t len;
+	ssize_t	len;
 	ssize_t	i;
 
 	len = find_c_index(*data, '\n');
 	if (len == -1)
 		len = find_c_index(*data, '\0');
 	else
-	 	len += 1;
+		len += 1;
 	(*line) = malloc(len + 1);
 	if (!(*line))
 		return (1);

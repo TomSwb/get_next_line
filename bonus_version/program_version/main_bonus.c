@@ -6,7 +6,7 @@
 /*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:56:31 by tomswb            #+#    #+#             */
-/*   Updated: 2026/09/22 17:04:48 by tomswb           ###   ########.fr       */
+/*   Updated: 2026/09/23 16:38:42 by tomswb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 #include <fcntl.h>
 
 void	stdin_gnl(void);
-void	many_files_gnl(char **av);
-int *allocate_fds(char **av, size_t *i);
-int check_fds(int *fds, size_t len);
-void process_fd_line(int *fds, size_t i);
+void	files_gnl(char **av);
+int		*allocate_fds(char **av, size_t *i);
+int		check_fds(int *fds, size_t len);
+void	process_fd_line(int *fds, size_t i);
 
 int	main(int ac, char **av)
 {
 	if (ac == 1)
 		stdin_gnl();
 	else
-		many_files_gnl(av);
+		files_gnl(av);
 }
 
 void	stdin_gnl(void)
@@ -44,7 +44,7 @@ void	stdin_gnl(void)
 	}
 }
 
-void	many_files_gnl(char **av)
+void	files_gnl(char **av)
 {
 	int *fds;
 	size_t len;
@@ -66,7 +66,7 @@ void	many_files_gnl(char **av)
 	free(fds);
 }
 
-int *allocate_fds(char **av, size_t *i)
+int	*allocate_fds(char **av, size_t *i)
 {
 	int *fds;
 	
@@ -86,7 +86,7 @@ int *allocate_fds(char **av, size_t *i)
 	return (fds);
 }
 
-int check_fds(int *fds, size_t len)
+int	check_fds(int *fds, size_t len)
 {
 	size_t i;
 	
@@ -100,7 +100,7 @@ int check_fds(int *fds, size_t len)
 	return (0);
 }
 
-void process_fd_line(int *fds, size_t i)
+void	process_fd_line(int *fds, size_t i)
 {
 	char *line;
 	char c;
