@@ -21,19 +21,19 @@ char	*get_next_line(int fd)
 
 	file = find_node(fd, &list);
 	if (!file)
-		return (free_node());
+		return (free_node(fd, &list));
 	while (file->data == NULL || find_c_index(file->data, '\n') < 0)
 	{
 		reading = extract_buffer(fd, &file->data);
 		if (reading < 0)
-			return (free_data(file->data));
+			return (free_node(fd, &list));
 		if (reading == 0)
 			break;
 	}
 	if (file->data == NULL)
 		return (NULL);
 	if (extract_line(&line, &file->data))
-		return (free_data(file->data));
+		return (free_node(fd, &list));
 	return (line);
 }
 
@@ -80,7 +80,7 @@ t_node *create_node(int fd)
 	return (node);
 }
 
-void free_node(void)
+void *free_node(int fd, t_node **list)
 {
 	
 }
