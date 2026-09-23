@@ -45,7 +45,7 @@ t_node	*find_node(int fd, t_node *list)
 	temp = list;
 	while (*temp)
 	{
-		if (temp->fd == fd)
+		if (temp.fd == fd)
 		{
 			node = temp;
 			return (node);
