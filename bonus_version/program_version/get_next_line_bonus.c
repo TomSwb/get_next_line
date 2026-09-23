@@ -20,8 +20,12 @@ char	*get_next_line(int fd)
 	ssize_t			reading;
 
 	if (list == NULL)
-		list = find_node(fd, list);
-	file = find_node(fd, list);
+	{
+		list = create_node(fd);
+		file = list
+	}
+	else
+		file = find_node(fd, list);
 	while (file->data == NULL || find_c_index(file->data, '\n') < 0)
 	{
 		reading = extract_buffer(fd, &file->data);
@@ -53,17 +57,25 @@ t_node	*find_node(int fd, t_node *list)
 		temp = temp->next;
 	}
 	if (temp->fd == fd)
-		{
+	{
 			node = temp;
 			return (node);
-		}
+	}
+	node = create_node(fd);
+	temp->next = node;
+	return (node);
+}
+
+t_node *create_node(int fd)
+{
+	t_node	*node;
+	
 	node = malloc(sizeof(t_node));
 	if (!node)
 		return (NULL);
 	node->fd = fd;
 	node->data = NULL;
 	node->next = NULL;
-	temp->next = node;
 	return (node);
 }
 
