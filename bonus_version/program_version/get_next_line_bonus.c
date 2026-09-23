@@ -40,7 +40,25 @@ char	*get_next_line(int fd)
 t_node	*find_node(int fd, t_node *list)
 {
 	t_node	*node;
-
+	t_node *temp;
+	
+	temp = list;
+	while (*temp)
+	{
+		if (temp->fd == fd)
+		{
+			node = temp;
+			return (node);
+		}
+		temp = temp->next;
+	}
+	node = malloc(sizeof(t_node));
+	if (!node)
+		return (NULL);
+	temp->next = &node;
+	node.fd = fd;
+	node.data = NULL;
+	node.next = NULL;
 	return (node);
 }
 
