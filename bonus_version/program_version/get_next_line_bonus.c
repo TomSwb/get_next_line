@@ -26,6 +26,8 @@ char	*get_next_line(int fd)
 	}
 	else
 		file = find_node(fd, list);
+	if (!file)
+		return (free_node());
 	while (file->data == NULL || find_c_index(file->data, '\n') < 0)
 	{
 		reading = extract_buffer(fd, &file->data);
