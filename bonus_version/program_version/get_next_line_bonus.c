@@ -79,6 +79,11 @@ t_node *create_node(int fd)
 	return (node);
 }
 
+void free_node(void)
+{
+	
+}
+
 char	*free_data(char *data)
 {
 	free(data);
