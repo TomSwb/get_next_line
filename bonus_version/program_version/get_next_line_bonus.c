@@ -55,10 +55,10 @@ t_node	*find_node(int fd, t_node *list)
 	node = malloc(sizeof(t_node));
 	if (!node)
 		return (NULL);
-	temp->next = &node;
 	node.fd = fd;
 	node.data = NULL;
 	node.next = NULL;
+	temp->next = &node;
 	return (node);
 }
 
