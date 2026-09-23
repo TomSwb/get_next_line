@@ -19,13 +19,7 @@ char	*get_next_line(int fd)
 	char			*line;
 	ssize_t			reading;
 
-	if (list == NULL)
-	{
-		list = create_node(fd);
-		file = list;
-	}
-	else
-		file = find_node(fd, list);
+	file = find_node(fd, &list);
 	if (!file)
 		return (free_node());
 	while (file->data == NULL || find_c_index(file->data, '\n') < 0)
@@ -43,12 +37,17 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-t_node	*find_node(int fd, t_node *list)
+t_node	*find_node(int fd, t_node **list)
 {
 	t_node	*node;
 	t_node *temp;
 	
-	temp = list;
+	if (*list == NULL)
+	{
+		*list = create_node(fd);
+		return (*list);
+	}
+	temp = *list;
 	while (temp->next != NULL)
 	{
 		if (temp->fd == fd)
