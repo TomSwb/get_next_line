@@ -58,7 +58,7 @@ t_node	*find_node(int fd, t_node *list)
 	node.fd = fd;
 	node.data = NULL;
 	node.next = NULL;
-	temp->next = &node;
+	temp.next = &node;
 	return (node);
 }
 
