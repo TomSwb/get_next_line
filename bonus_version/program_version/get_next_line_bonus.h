@@ -6,7 +6,7 @@
 /*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:53:07 by tomswb            #+#    #+#             */
-/*   Updated: 2026/09/22 17:39:06 by tomswb           ###   ########.fr       */
+/*   Updated: 2026/09/23 17:32:55 by tomswb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,21 @@
 #  define BUFFER_SIZE 1
 # endif
 
+// ** Struct ** //
+
+typedef struct s_node
+{
+	int				fd;
+	char			*data;
+	struct s_node	*next;
+} t_node;
+
 // ** Functions ** //
 
 // get_next_line.c
 char	*get_next_line(int fd);
+t_node	*find_node(int fd, t_node *list);
+char	*free_data(char *data);
 
 // get-next_line_utils.c
 ssize_t	find_c_index(char *s, int c);

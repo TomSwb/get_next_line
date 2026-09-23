@@ -6,7 +6,7 @@
 /*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:56:37 by tomswb            #+#    #+#             */
-/*   Updated: 2026/09/22 17:38:39 by tomswb           ###   ########.fr       */
+/*   Updated: 2026/09/23 17:38:44 by tomswb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,39 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*data;
-	char		*line;
-	ssize_t		reading;
+	static t_node	*list;
+	t_node			*file;
+	char			*line;
+	ssize_t			reading;
 
-	while (data == NULL || find_c_index(data, '\n') < 0)
+	if (list == NULL)
+		list = find_node(fd, list);
+	file = find_node(fd, list);
+	while (file->data == NULL || find_c_index(file->data, '\n') < 0)
 	{
-		reading = extract_buffer(fd, &data);
+		reading = extract_buffer(fd, &file->data);
 		if (reading < 0)
-		{
-			free(data);
-			data = NULL;
-			return (NULL);
-		}
+			return (free_data(file->data));
 		if (reading == 0)
 			break;
 	}
-	if (data == NULL)
+	if (file->data == NULL)
 		return (NULL);
-	if (extract_line(&line, &data))
-	{
-		free(data);
-		data = NULL;
-		return (NULL);
-	}
+	if (extract_line(&line, &file->data))
+		return (free_data(file->data));
 	return (line);
+}
+
+t_node	*find_node(int fd, t_node *list)
+{
+	t_node	*node;
+
+	return (node);
+}
+
+char	*free_data(char *data)
+{
+	free(data);
+	data = NULL;
+	return (NULL);
 }
