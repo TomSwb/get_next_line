@@ -6,7 +6,7 @@
 /*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:56:31 by tomswb            #+#    #+#             */
-/*   Updated: 2026/09/22 17:41:29 by tomswb           ###   ########.fr       */
+/*   Updated: 2026/09/23 16:37:35 by tomswb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_stdfile_gnl(char **av);
 int	main(int ac, char **av)
 {
 	if (ac > 2)
-		return (-1);
+		return (-1); 
 	if (ac == 1)
 		ft_stdin_gnl();
 	else
@@ -37,7 +37,7 @@ void	ft_stdin_gnl(void)
 	while (line != NULL)
 	{
 		len = find_c_index(line, '\0');
-		write(1, line, len);
+		write(0, line, len);
 		free(line);
 		line = get_next_line(fd);
 	}
