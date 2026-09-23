@@ -44,7 +44,8 @@ typedef struct s_node
 
 // get_next_line.c
 char	*get_next_line(int fd);
-t_node	*find_node(int fd, t_node *list);
+t_node	*find_node(int fd, t_node **list);
+t_node *create_node(int fd);
 char	*free_data(char *data);
 
 // get-next_line_utils.c
