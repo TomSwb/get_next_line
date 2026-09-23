@@ -22,7 +22,7 @@ char	*get_next_line(int fd)
 	if (list == NULL)
 	{
 		list = create_node(fd);
-		file = list
+		file = list;
 	}
 	else
 		file = find_node(fd, list);
