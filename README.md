@@ -54,8 +54,6 @@ Create my own line-by-line reading function.
 
 `Program versions:`
 
-```
-
 Basic:
 
 Compile (replace '42' with any positive number you choose):
