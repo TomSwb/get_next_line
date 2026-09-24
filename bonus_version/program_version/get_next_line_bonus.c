@@ -82,7 +82,18 @@ t_node *create_node(int fd)
 
 void *free_node(int fd, t_node **list)
 {
+	t_node *target;
+	t_node *previous;
 	
+	target = *list;
+	while (target->next->fd != fd)
+		target = target->next;
+	previous = target;
+	target = target->next;
+	previous->next = target->next;
+	free(target->data);
+	free(target);
+	return (NULL);
 }
 
 char	*free_data(char *data)
