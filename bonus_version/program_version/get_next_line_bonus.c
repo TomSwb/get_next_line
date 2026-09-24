@@ -6,7 +6,7 @@
 /*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:56:37 by tomswb            #+#    #+#             */
-/*   Updated: 2026/09/23 17:38:44 by tomswb           ###   ########.fr       */
+/*   Updated: 2026/09/24 18:04:21 by tomswb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ char	*get_next_line(int fd)
 
 	file = find_node(fd, &list);
 	if (!file)
-		return (free_node(fd, &list));
+		return (free_what_node(fd, &list));
 	while (file->data == NULL || find_c_index(file->data, '\n') < 0)
 	{
 		reading = extract_buffer(fd, &file->data);
 		if (reading < 0)
-			return (free_node(fd, &list));
+			return (free_what_node(fd, &list));
 		if (reading == 0)
 			break;
 	}
 	if (file->data == NULL)
 		return (NULL);
 	if (extract_line(&line, &file->data))
-		return (free_node(fd, &list));
+		return (free_what_node(fd, &list));
 	return (line);
 }
 
@@ -80,25 +80,51 @@ t_node *create_node(int fd)
 	return (node);
 }
 
-void	*free_node(int fd, t_node **list)
+void	*free_what_node(int fd, t_node **list)
 {
 	t_node	*target;
-	t_node	*previous;
 
+	if (!list || *list == NULL)
+		return (NULL);
 	target = *list;
-	while (target->next->fd != fd)
-		target = target->next;
-	previous = target;
-	target = target->next;
-	previous->next = target->next;
-	free(target->data);
-	free(target);
-	return (NULL);
+	if (target->fd != fd)
+	{
+		while (target->next != NULL && target->next->next != NULL)
+		{
+			if (target->next->fd != fd)
+				target = target->next;
+			else if (target->next->fd == fd)
+				return (free_node(target, list, 0));
+		}
+		if (target->next == NULL)
+			return (NULL);
+		else if (target->next->fd != fd)
+			return (NULL);
+		else
+		 	return (free_node(target, list, 0));
+	}
+	else 
+		return (free_node(target, list, 1));
 }
 
-char	*free_data(char *data)
+void	*free_node(t_node *target, t_node **list, int is_head)
 {
-	free(data);
-	data = NULL;
+	t_node	*link;
+	
+	if (!is_head)
+	{
+		link = target;
+		target = target->next;
+		link->next = target->next;
+		free(target->data);
+		free(target);
+	}
+	else
+	{
+		link = target->next;
+		free(target->data);
+		free(target);
+		*list = link;
+	}
 	return (NULL);
 }

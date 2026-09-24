@@ -6,7 +6,7 @@
 /*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:53:07 by tomswb            #+#    #+#             */
-/*   Updated: 2026/09/23 17:32:55 by tomswb           ###   ########.fr       */
+/*   Updated: 2026/09/24 18:03:41 by tomswb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ typedef struct s_node
 char	*get_next_line(int fd);
 t_node	*find_node(int fd, t_node **list);
 t_node *create_node(int fd);
-char	*free_data(char *data);
+void	*free_what_node(int fd, t_node **list);
+void	*free_node(t_node *target, t_node **list, int is_head);
 
 // get-next_line_utils.c
 ssize_t	find_c_index(char *s, int c);
