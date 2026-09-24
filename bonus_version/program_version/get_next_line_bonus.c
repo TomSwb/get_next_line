@@ -86,9 +86,14 @@ void *free_node(int fd, t_node **list)
 	t_node *previous;
 	
 	target = *list;
-	while (target->next->fd != fd)
-		target = target->next;
-	previous = target;
+	if (target->fd != fd
+	{
+		while (target->next->fd != fd)
+			target = target->next;
+		previous = target;
+	}
+	else 
+		precious = *list;
 	target = target->next;
 	previous->next = target->next;
 	free(target->data);
