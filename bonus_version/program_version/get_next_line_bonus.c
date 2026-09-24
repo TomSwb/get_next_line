@@ -80,20 +80,15 @@ t_node *create_node(int fd)
 	return (node);
 }
 
-void *free_node(int fd, t_node **list)
+void	*free_node(int fd, t_node **list)
 {
-	t_node *target;
-	t_node *previous;
-	
+	t_node	*target;
+	t_node	*previous;
+
 	target = *list;
-	if (target->fd != fd)
-	{
-		while (target->next->fd != fd)
-			target = target->next;
-		previous = target;
-	}
-	else 
-		precious = *list;
+	while (target->next->fd != fd)
+		target = target->next;
+	previous = target;
 	target = target->next;
 	previous->next = target->next;
 	free(target->data);
