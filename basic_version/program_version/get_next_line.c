@@ -6,12 +6,40 @@
 /*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:56:37 by tomswb            #+#    #+#             */
-/*   Updated: 2026/09/23 16:39:11 by tomswb           ###   ########.fr       */
+/*   Updated: 2026/09/24 19:24:36 by tomswb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+/**
+* @brief
+Returns a pointer to the next available line from the file pointed out by 'fd'.
+
+Depends on:
+	find_c_index();
+	
+	extract_buffer();
+		cat_buffer_data();
+			find_c_index();
+			malloc();
+			free();
+		malloc();
+		free();
+		
+	extract_line();
+		find_c_index();
+		clean_data();
+			find_c_index();
+			free();
+		malloc();
+
+External:
+	free();
+
+* @param int fd 
+* @return char* 
+*/
 char	*get_next_line(int fd)
 {
 	static char	*data;

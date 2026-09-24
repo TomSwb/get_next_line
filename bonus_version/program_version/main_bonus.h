@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*   main_bonus.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/19 15:56:31 by tomswb            #+#    #+#             */
-/*   Updated: 2026/09/24 18:52:20 by tomswb           ###   ########.fr       */
+/*   Created: 2026/09/19 15:53:07 by tomswb            #+#    #+#             */
+/*   Updated: 2026/09/24 18:53:11 by tomswb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main_bonus.h"
-#include <fcntl.h>
+#ifndef MAIN_BONUS_H
+# define MAIN_BONUS_H
 
-int	main(int ac, char **av)
-{
-	if (ac == 1)
-		stdin_gnl();
-	else
-		files_gnl(av);
-}
+// ** Library ** //
+
+# include "get_next_line_bonus.h"
+
+// ** Functions ** //
+
+// main_bonus_utils.c
+void	stdin_gnl(void);
+void	files_gnl(char **av);
+int		*allocate_fds(char **av, size_t *i);
+int		check_fds(int *fds, size_t len);
+void	process_fd_line(int *fds, size_t i);
+
+#endif

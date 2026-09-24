@@ -6,12 +6,21 @@
 /*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:56:40 by tomswb            #+#    #+#             */
-/*   Updated: 2026/09/22 17:40:02 by tomswb           ###   ########.fr       */
+/*   Updated: 2026/09/24 19:12:34 by tomswb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
+/**
+* @brief 
+Returns a ssize_t representing the index of 'c' in 's'.
+The return value is equal to len of 's' up to 'c'.
+
+* @param char *s 
+* @param int c 
+* @return ssize_t 
+*/
 ssize_t	find_c_index(char *s, int c)
 {
 	size_t	i;
@@ -30,7 +39,27 @@ ssize_t	find_c_index(char *s, int c)
 	return (-1);
 }
 
-ssize_t extract_buffer(int fd, char **data)
+/**
+* @brief 
+Returns ssize_t 'reading' indicating eof or not.
+Extract the 'buffer' into 'data', ensuring allocation and calling
+concatenation function if 'data' isn't empty. 
+
+Depends on:
+	cat_buffer_data();
+		find_c_index();
+		malloc();
+		free();
+
+External:
+	malloc();
+	free();
+
+* @param int fd 
+* @param char **data 
+* @return ssize_t 
+*/
+ssize_t	extract_buffer(int fd, char **data)
 {
 	char	*buffer;
 	ssize_t	reading;
@@ -56,11 +85,27 @@ ssize_t extract_buffer(int fd, char **data)
 	return (reading);
 }
 
+/**
+* @brief 
+Returns a concatenation of 'buffer' into 'data' if data is not empty
+or simply it's copy if 'data' is empty.
+
+Depends on:
+	find_c_index();
+
+External:
+	malloc();
+	free();
+
+* @param char *buffer 
+* @param char **data 
+* @return char* 
+*/
 char	*cat_buffer_data(char *buffer, char **data)
 {
 	char	*temp;
-    size_t i;
-    size_t j;
+	size_t	i;
+	size_t	j;
 
 	temp = malloc(find_c_index(buffer, '\0') + find_c_index(*data, '\0') + 1);
 	if (!temp)
@@ -85,16 +130,35 @@ char	*cat_buffer_data(char *buffer, char **data)
 	return (temp);
 }
 
+/**
+* @brief 
+Returns a success boolean.
+Extract the present line in 'data' intp the pointed 'line' 
+for printing in GNL.
+
+Depends on:
+	find_c_index();
+	clean_data();
+		find_c_index();
+		free();
+
+External:
+	malloc();
+
+* @param char **line 
+* @param char **data 
+* @return int 
+*/
 int	extract_line(char **line, char **data)
 {
-	ssize_t len;
+	ssize_t	len;
 	ssize_t	i;
 
 	len = find_c_index(*data, '\n');
 	if (len == -1)
 		len = find_c_index(*data, '\0');
 	else
-	 	len += 1;
+		len += 1;
 	(*line) = malloc(len + 1);
 	if (!(*line))
 		return (1);
