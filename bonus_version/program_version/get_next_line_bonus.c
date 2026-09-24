@@ -86,7 +86,7 @@ void *free_node(int fd, t_node **list)
 	t_node *previous;
 	
 	target = *list;
-	if (target->fd != fd
+	if (target->fd != fd)
 	{
 		while (target->next->fd != fd)
 			target = target->next;
