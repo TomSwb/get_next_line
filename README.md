@@ -22,7 +22,11 @@ Create my own line-by-line reading function.
 * get_next_line.h
 * README
 
-TODO []:
+`Program version additionally contains:`
+
+* main.c
+* test1.txt
+* a.out
 
 ##### Bonus version:
 
@@ -35,25 +39,39 @@ TODO []:
 
 * get_next_line_bonus.h
 
+`Program version additionally contains:`
+
+* main_bonus.c
+* main_utils_bonus.c
+* test1.txt
+* test2.txt
+* test3.txt
+* a.out
+
 ## Instructions
 
-`Libft version:` Part of my libft. It can be added to it and used (currently only basic version is ready).
+`Libft version:` Part of my libft. It can be added to it and used - see instructions in the Libft README (pending...).
 
-`Program version:`
+`Program versions:`
 
-````
+```
+
 Basic:
 
 Compile (replace '42' with any positive number you choose):
 
 ```bash
+
 cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 main.c get_next_line.c get_next_line_utils.c
+
 ```
 
 Use (replace main.c with any single file you choose):
 
 ```bash
+
 ./a.out main.c
+
 ```
 
 Bonus:
@@ -61,28 +79,32 @@ Bonus:
 Compile (replace '42' with any positive number you choose):
 
 ```bash
-cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 main_bonus.c get_next_line_bonus.c get_next_line_utils_bonus.c
+
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 main_bonus.c main_utils_bonus.c get_next_line_bonus.c get_next_line_utils_bonus.c
+
 ```
 
 Use (replace main.c and text.txt with any files you choose):
 
 ```bash
+
 ./a.out main.c text.txt
+
 ```
-````
 
 Press Enter to see the next line. If using the bonus version with multiple files, it will first show you each file's line 1, then each file's line 2, etc., changing which files it is working with at each press.
 
 Either reach the end of the file(s) or press CTRL + C to end the program.
 
-
 Either version can be used with stdin:
 
 ```bash
+
 ./a.out
+
 ```
 
-After launching program, writes some text then press enter, it will print you text again.
+After launching the program, write some text and then press Enter. It will print your text back. Press CTRL + D to exit.
 
 ## Resources
 
@@ -110,17 +132,21 @@ I use VSCodium on purpose to not have AI integration. This means that, except fo
 
 * `ChatGPT`:
 
-  1. Understanding of static variables.
-  2. Peer-to-peer help as I would get on campus.
-  3. Pointer understanding.
+1. Understanding of static variables.
+
+2. Peer-to-peer help as I would get on campus.
+
+3. Pointer understanding.
 
 ## Detailed description:
 
 #### Why this algorithm:
 
-I began by learning what a static variable is. I understood it is a variable that stays in memory between function calls, until the program ends or is exited. I had, however, not understood that I needed to allocate its content. My first extract_buffer() was therefore not compliant but already had the structure it has now.
+#### Both basic and bonus versions:
 
-I found it important that get_next_line be mainly responsible for managing the overall operation and the freeing of data if required. This also helped me understand memory ownership more clearly, by deciding which function is responsible for each allocation and where that memory should be freed. Then it became clear I needed a way to extract the buffer into the static variable to be able to work with it and find a line in it, as well as save the leftover for the next call.
+I began by learning what a static variable is. I understood that it is a variable that stays in memory between function calls, until the program ends or is exited. I had, however, not understood that I needed to allocate its content. My first extract_buffer() was therefore not compliant, but already had the structure it has now.
+
+I found it important that get_next_line be mainly responsible for managing the overall operation and freeing data if required. This also helped me understand memory ownership more clearly, by deciding which function is responsible for each allocation and where that memory should be freed. Then it became clear that I needed a way to extract the buffer into the static variable to be able to work with it and find a line in it, as well as save the leftover for the next call.
 
 I therefore needed two main things: a buffer extractor and a line extractor.
 
@@ -141,3 +167,27 @@ Once the allocation is done, it copies 'len' characters from data to line. It th
 `clean_data:`
 
 This function moves the bytes remaining after the extracted line to the front of the data allocation. If no bytes remain except '\0', data is no longer needed and can be freed and reset to NULL.
+
+#### Bonus version only:
+
+The bonus version offers the challenge of being able to read from more than one file. My underlying goal was to not modify any of my utils and only use the available 4 function slots in the GNL file to succeed. This was to avoid having two radically different versions.
+
+I understood right away that my preferred approach would be through a list of nodes, each containing the 'fd' as a recognisable key, a 'data' field allowing me to save the corresponding 'fd' data status, and obviously a 'next' pointing to the next node in the list.
+
+I had to change GNL itself to support that architecture, including finding the right node and freeing it when needed. Four additional helpers came out of it.
+
+`find_node`
+
+find_node is what allows GNL to get the correct node pointer, giving it access to the corresponding data. If find_node finds that the fd does not have a node, it calls create_node() to create one and returns a pointer to the new node.
+
+`create_node`
+
+Creates and allocates a new node, placing the required 'fd' as its key.
+
+`free_what_node`
+
+When needed, GNL needs to free both the data and the node. This function does the search part of the job, then calls free_node(). It returns the result of freeing (NULL).
+
+`free_node`
+
+Frees both the 'data' and 'node' memory, returning NULL, ensuring the list is left correctly linked, either to the previous node, or to the head.
