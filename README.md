@@ -50,9 +50,10 @@ Create my own line-by-line reading function.
 
 ## Instructions
 
-`Libft version:` Part of my libft. It can be added to it and used - see instructions in the Libft README (pending...).
+#### Libft version: 
+Part of my libft. It can be added to it and used - see instructions in the Libft README (pending...).
 
-`Program versions:`
+#### Program versions:
 
 Basic:
 
