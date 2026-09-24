@@ -129,7 +129,7 @@ My AI agents are set to guide me with questions as per the 42 pedagogical philos
 
 I use VSCodium on purpose to not have AI integration. This means that, except for my copy-pastes into chats for some reviews, AI does not see my code, and AI will never write my code - I do not copy-paste from AI into my code.
 
-* `ChatGPT`:
+* ChatGPT:
 
 1. Understanding of static variables.
 
