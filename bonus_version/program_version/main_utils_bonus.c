@@ -6,7 +6,7 @@
 /*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:56:31 by tomswb            #+#    #+#             */
-/*   Updated: 2026/09/24 18:50:26 by tomswb           ###   ########.fr       */
+/*   Updated: 2026/09/26 12:12:08 by tomswb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,17 @@ int	*allocate_fds(char **av, size_t *i)
 	*i = 1;
 	while (av[*i])
 		(*i)++;
-	fds = malloc(sizeof(int) * *i);
+	fds = malloc(sizeof(int) * *i + 1);
 	if (!fds)
 		return (NULL);
+	fds[0] = 0;
 	*i = 1;
 	while (av[*i])
 	{
-		fds[(*i) - 1] = open(av[*i], O_RDONLY);
+		fds[*i] = open(av[*i], O_RDONLY);
 		(*i)++;
 	}
-	fds[(*i) - 1] = -1;
+	fds[*i] = -1;
 	return (fds);
 }
 
@@ -103,12 +104,14 @@ void	process_fd_line(int *fds, size_t i)
 		line = get_next_line(fds[i]);
 		if (line != NULL)
 		{
+			c = fds[i] + 48;
 			line_len = find_c_index(line, '\0');
+			write(1, "Fd ", 3);
+			write(1, &c, 1);
+			write(1, " = ", 3);
 			write(1, line, line_len);
+			write(1, "\n", 1);
 			free(line);
-			read(0, &c, 1);
-			while (c != '\n')
-				read(0, &c, 1);
 		}
 		else
 		{
