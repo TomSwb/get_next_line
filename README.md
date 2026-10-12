@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by \<tschwab>*
+*This project has been created as part of the 42 curriculum by [tschwab](https://profile-v3.intra.42.fr/users/tschwab)*
 
 # get_next_line - a function by TomSwb
 
