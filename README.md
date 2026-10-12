@@ -173,7 +173,9 @@ The bonus version offers the challenge of being able to read from more than one 
 
 I understood right away that my preferred approach would be through a list of nodes, each containing the 'fd' as a recognisable key, a 'data' field allowing me to save the corresponding 'fd' data status, and obviously a 'next' pointing to the next node in the list.
 
-I had to change GNL itself to support that architecture, including finding the right node and freeing it when needed. Four additional helpers came out of it.
+I chose this because being a struct allow to me more flexibility and an easiness of passing around the different data point into the helpers. A 'char **' could have been a possibility, but would have meant a more complex implementation especially around the completion of a file and thereofre the need to remove that line from the overrall tableau. To disconect and reconnect nodes was a simpler picture to me.
+
+I had to change GNL itself to support that architecture, including finding the right node and freeing it when needed. Four additional helpers came out of it. But i did not need to change any of the other helpers.
 
 `find_node`
 
