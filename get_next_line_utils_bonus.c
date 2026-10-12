@@ -6,7 +6,7 @@
 /*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:56:40 by tomswb            #+#    #+#             */
-/*   Updated: 2026/09/24 19:12:34 by tomswb           ###   ########.fr       */
+/*   Updated: 2026/10/12 22:49:57 by tomswb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ char	*cat_buffer_data(char *buffer, char **data)
 /**
 * @brief 
 Returns a success boolean.
-Extract the present line in 'data' intp the pointed 'line' 
+Extract the present line in 'data' into the pointed 'line' 
 for printing in GNL.
 
 Depends on:
