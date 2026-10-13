@@ -36,7 +36,7 @@
 // get_next_line.c
 char	*get_next_line(int fd);
 
-// get-next_line_utils.c
+// get_next_line_utils.c
 ssize_t	find_c_index(char *s, int c);
 ssize_t	extract_buffer(int fd, char **data);
 char	*cat_buffer_data(char *buffer, char **data);
