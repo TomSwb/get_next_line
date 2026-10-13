@@ -6,7 +6,7 @@
 /*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:56:40 by tomswb            #+#    #+#             */
-/*   Updated: 2026/10/14 01:25:34 by tomswb           ###   ########.fr       */
+/*   Updated: 2026/10/14 01:29:22 by tomswb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,19 @@ ssize_t	extract_buffer(int fd, char **data)
 
 	buffer = malloc(PENDING_BUFFER + BUFFER_SIZE + 1);
 	if (!buffer || BUFFER_SIZE <= 0)
-		return (-1);
+		return (free(buffer), -1);
 	total = 0;
 	while (total < PENDING_BUFFER)
 	{
 		reading = read(fd, buffer + total, BUFFER_SIZE);
-		if (reading > 0)
+		if (reading <= 0)
 			break ;
 		total += reading;
 		buffer[total] = '\0';
-		if (find_c_index(buffer + total - reading, 'n') >= 0)
+		if (find_c_index(buffer + total - reading, '\n') >= 0)
 			break ;
 	}
-	if (reading <= 0)
+	if (reading < 0 || total == 0)
 		return (free(buffer), reading);
 	if (!cat_buffer_data(buffer, data))
 		total = -1;
