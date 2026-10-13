@@ -49,7 +49,7 @@ t_node	*create_node(int fd);
 void	*free_what_node(int fd, t_node **list);
 void	*free_node(t_node *target, t_node **list, int is_head);
 
-// get-next_line_utils_bonus.c
+// get_next_line_utils_bonus.c
 ssize_t	find_c_index(char *s, int c);
 ssize_t	extract_buffer(int fd, char **data);
 char	*cat_buffer_data(char *buffer, char **data);
