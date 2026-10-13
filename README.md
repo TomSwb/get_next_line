@@ -157,6 +157,10 @@ get_next_line() will call extract_buffer() as many times as needed, until either
 
 If this whole operation works as planned and either EOF or '\n' is detected, get_next_line() can then proceed by calling extract_line.
 
+After testing with Tripouille, I discover that I had a timeout on BUFFER_SIZE == 1. This because with my implementation, it was taking over 4" for the read to complete and data to reach a '\n' before returnning when it came to test long lines and Tripouilles times out at 1". I asked Claude for help on this one as I was home and it made me realise that concatenation was happening for every single byte and that was the reason that my program was slow, if could ensure that concatenation happens only once we met a '\n' or at eof, then it would be much faster.
+
+Claude guided me in recomposing my functions. I asked for help to ensure I respect the norm and it was also 1am. The chosen strategy relied first on removing the need for temp in the function and relying on the concatenation function to free the previous data before transfering the pointer. That function could therefore return a success boolean instead of an array. Then the major changes came into extract_buffer, introducing a loop based on the total of bytes read and not anymore on if a byte was still being read. That total is compared to a new macro, PENDING_BUFFER that i defined in the include with a size of 4096, classic memory page. From then on, the buffer is not anymore and erase over, but is in itself concatenate until we reach the eof or am end of a line is detected inside the buffer..
+
 `extract_line:`
 
 The extraction will first determine the length needed for the line, using either '\n' or, if not found, '\0' as the end-of-line point, and allocate the required memory.
