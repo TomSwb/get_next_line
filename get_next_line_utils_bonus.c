@@ -6,7 +6,7 @@
 /*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:56:40 by tomswb            #+#    #+#             */
-/*   Updated: 2026/10/12 22:49:57 by tomswb           ###   ########.fr       */
+/*   Updated: 2026/10/14 01:25:34 by tomswb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ ssize_t	find_c_index(char *s, int c)
 * @brief 
 Returns ssize_t 'reading' indicating eof or not.
 Extract the 'buffer' into 'data', ensuring allocation and calling
-concatenation function if 'data' isn't empty. 
+concatenation.
 
 Depends on:
 	cat_buffer_data();
@@ -63,31 +63,33 @@ ssize_t	extract_buffer(int fd, char **data)
 {
 	char	*buffer;
 	ssize_t	reading;
-	char	*temp;
+	ssize_t	total;
 
-	if (BUFFER_SIZE <= 0)
+	buffer = malloc(PENDING_BUFFER + BUFFER_SIZE + 1);
+	if (!buffer || BUFFER_SIZE <= 0)
 		return (-1);
-	buffer = malloc(BUFFER_SIZE + 1);
-	if (!buffer)
-		return (-1);
-	reading = read(fd, buffer, BUFFER_SIZE);
-	if (reading <= 0)
+	total = 0;
+	while (total < PENDING_BUFFER)
 	{
-		free(buffer);
-		return (reading);
+		reading = read(fd, buffer + total, BUFFER_SIZE);
+		if (reading > 0)
+			break ;
+		total += reading;
+		buffer[total] = '\0';
+		if (find_c_index(buffer + total - reading, 'n') >= 0)
+			break ;
 	}
-	buffer[reading] = '\0';
-	temp = cat_buffer_data(buffer, data);
-	free(buffer);
-	if (temp == NULL)
-		return (-1);
-	*data = temp;
-	return (reading);
+	if (reading <= 0)
+		return (free(buffer), reading);
+	if (!cat_buffer_data(buffer, data))
+		total = -1;
+	return (free(buffer), total);
 }
 
 /**
 * @brief 
-Returns a concatenation of 'buffer' into 'data' if data is not empty
+Returns a boolean that confirm the concatenation
+of 'buffer' into 'data' if data is not empty
 or simply it's copy if 'data' is empty.
 
 Depends on:
@@ -99,9 +101,9 @@ External:
 
 * @param char *buffer 
 * @param char **data 
-* @return char* 
+* @return int 
 */
-char	*cat_buffer_data(char *buffer, char **data)
+int	cat_buffer_data(char *buffer, char **data)
 {
 	char	*temp;
 	size_t	i;
@@ -109,15 +111,12 @@ char	*cat_buffer_data(char *buffer, char **data)
 
 	temp = malloc(find_c_index(buffer, '\0') + find_c_index(*data, '\0') + 1);
 	if (!temp)
-		return (NULL);
+		return (0);
 	i = 0;
-	if (*data != NULL)
+	while (*data && (*data)[i])
 	{
-		while ((*data)[i])
-		{
-			temp[i] = (*data)[i];
-			i++;
-		}
+		temp[i] = (*data)[i];
+		i++;
 	}
 	j = 0;
 	while (buffer[j])
@@ -127,7 +126,8 @@ char	*cat_buffer_data(char *buffer, char **data)
 	}
 	temp[i + j] = '\0';
 	free(*data);
-	return (temp);
+	*data = temp;
+	return (1);
 }
 
 /**
