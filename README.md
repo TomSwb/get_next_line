@@ -173,11 +173,13 @@ The bonus version offers the challenge of being able to read from more than one 
 
 I understood right away that my preferred approach would be through a list of nodes, each containing the 'fd' as a recognisable key, a 'data' field allowing me to save the corresponding 'fd' data status, and obviously a 'next' pointing to the next node in the list.
 
-I chose this because being a struct allow me more flexibility and an easiness of passing around the different data point into the helpers. A 'char **' could have been a possibility, but would have meant a more complex implementation especially around the completion of a file and therefore the need to remove that line from the overall array of pointer. To disconect and reconnect nodes was a simpler picture to me. 
+I chose this because being a struct allows me more flexibility and an easiness of passing around the different data point into the helpers. A 'char **' could have been a possibility, but would have meant a more complex implementation especially around the completion of a file and therefore the need to remove that line from the overall array of pointers. To disconnect and reconnect nodes was a simpler picture to me. 
 
-After further research I understood that this initial reason was wrong and unfounded. However I also learned the main difference between both possible implementation: a list allow for any amount of node and therefore any amount of files to be read, when an array of pointer is finite (even if that finality is great and can differ from system to system). 
+After further research I understood that this initial reason was partly wrong. I learned the main difference between both possible implementations: a list allows for any amount of node and therefore any amount of files to be read, when an array of pointers is finite (even if that limit is large and can differ from system to system). 
 
-Also an array of pointer would require to allocate the memory for that finite size of fd pointer required, when a list is only requiring to allocate the memory for the actual amount of files. This to me ensure a safer way to avoid allocation failures.
+Also an array of pointers would require to allocate the memory for that finite size of fd pointers required, when a list is only requiring to allocate the memory for the actual amount of files.
+
+The trade-of is speed, as a list requires to go through potential 'n' nodes to find the corresponding fd when a char ** search using the fd as index. The clean-up of the list is also more complicated requiring to relink the nodes.
 
 I had to change GNL itself to support that architecture, including finding the right node and freeing it when needed. Four additional helpers came out of it. But I did not need to change any of the other helpers.
 
