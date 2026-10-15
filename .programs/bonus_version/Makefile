@@ -1,32 +1,47 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tschwab <tschwab@student.42lausanne.ch>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/10/15 14:27:32 by tschwab           #+#    #+#              #
+#    Updated: 2026/10/15 14:27:33 by tschwab          ###   ########.ch        #
+#                                                                              #
+# **************************************************************************** #
 
-NAME = libftgnl.a
+NAME		= gnl_bonus
 
-SOURCES = get_next_line.c \
-		get_next_line_utils.c
+SOURCES		= main_bonus.c \
+			main_utils_bonus.c \
+			get_next_line_bonus.c \
+			get_next_line_utils_bonus.c
 
-CC = gcc
+HEADERS		= get_next_line_bonus.h \
+			main_bonus.h
 
-CFLAGS = -Wall -Werror -Wextra
+OBJECTS		= ${SOURCES:.c=.o}
 
-OBJECTS = ${SOURCES:.c=.o}
+BUFFER_SIZE	?= 42
 
-AR = ar -rcs
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror -D BUFFER_SIZE=${BUFFER_SIZE}
 
-RM = rm -f
-
-%.o: %.c get_next_line.h
-	${CC} ${CFLAGS} -c $< -o $@
+RM			= rm -f
 
 all: ${NAME}
 
 ${NAME}: ${OBJECTS}
-		${AR} ${NAME} ${OBJECTS}
+	${CC} ${CFLAGS} ${OBJECTS} -o ${NAME}
 
-clean: 
-		${RM} ${OBJECTS}
+%.o: %.c ${HEADERS}
+	${CC} ${CFLAGS} -c $< -o $@
+
+clean:
+	${RM} ${OBJECTS}
 
 fclean: clean
-		${RM} ${NAME}
+	${RM} ${NAME}
 
 re: fclean all
 

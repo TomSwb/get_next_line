@@ -6,7 +6,7 @@
 /*   By: tschwab <tschwab@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:56:40 by tschwab           #+#    #+#             */
-/*   Updated: 2026/10/15 14:05:23 by tschwab          ###   ########.ch       */
+/*   Updated: 2026/10/15 14:28:34 by tschwab          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ ssize_t	extract_buffer(int fd, char **data)
 
 /**
 * @brief 
-Returns a boolean that confirm the concatenation
+Returns a boolean that confirms the concatenation
 of 'buffer' into 'data' if data is not empty
-or simply it's copy if 'data' is empty.
+or simply its copy if 'data' is empty.
 
 Depends on:
 	find_c_index();
