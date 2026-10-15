@@ -6,13 +6,11 @@
 /*   By: tschwab <tschwab@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:56:40 by tschwab           #+#    #+#             */
-/*   Updated: 2026/10/15 14:28:34 by tschwab          ###   ########.ch       */
+/*   Updated: 2026/10/15 14:31:56 by tschwab          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdlib.h>
-#include <unistd.h>
 
 /**
 * @brief 
@@ -45,7 +43,7 @@ ssize_t	find_c_index(char *s, int c)
 * @brief 
 Returns ssize_t 'reading' indicating eof or not.
 Extract the 'buffer' into 'data', ensuring allocation and calling
-concatenation function if 'data' isn't empty. 
+concatenation function if 'data' isn't empty.
 
 Depends on:
 	cat_buffer_data();
