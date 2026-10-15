@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomswb <tomswb@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tschwab <tschwab@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/19 15:53:07 by tomswb            #+#    #+#             */
-/*   Updated: 2026/09/24 19:21:02 by tomswb           ###   ########.fr       */
+/*   Created: 2026/09/19 15:53:07 by tschwab           #+#    #+#             */
+/*   Updated: 2026/10/15 14:08:46 by tschwab          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 #  define BUFFER_SIZE 1
 # endif
 
+# define PENDING_BUFFER 16384L
+
 // *** Struct *** //
 
 typedef struct s_node
@@ -49,10 +51,10 @@ t_node	*create_node(int fd);
 void	*free_what_node(int fd, t_node **list);
 void	*free_node(t_node *target, t_node **list, int is_head);
 
-// get-next_line_utils_bonus.c
+// get_next_line_utils_bonus.c
 ssize_t	find_c_index(char *s, int c);
 ssize_t	extract_buffer(int fd, char **data);
-char	*cat_buffer_data(char *buffer, char **data);
+int		cat_buffer_data(char *buffer, char **data);
 int		extract_line(char **line, char **data);
 void	clean_data(char **data, ssize_t len);
 

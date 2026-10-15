@@ -141,9 +141,11 @@ I use VSCodium on purpose to not have AI integration. This means that, except fo
 
 1. Peer-to-peer help as I would get on campus.
 
-2. Stupid mistake check to avoid failing moulinette because e.g. I used .MD extension instead of .md
+2. Stupid mistake check to avoid failing moulinette because e.g. I used .MD extension instead of .md.
 
-3. Help in figuring out the need for PENDING_BUFFER and the logic to reduce time needs for a small BUFFER_SIZE
+3. Help in figuring out the need for PENDING_BUFFER and the logic to reduce time needs for a small BUFFER_SIZE.
+
+4. Help in completing/correcting this Readme.
 
 ## Detailed description:
 
