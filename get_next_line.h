@@ -6,7 +6,7 @@
 /*   By: tschwab <tschwab@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 15:53:07 by tschwab           #+#    #+#             */
-/*   Updated: 2026/10/14 01:21:12 by tschwab          ###   ########.ch       */
+/*   Updated: 2026/10/15 14:07:07 by tschwab          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 #  define BUFFER_SIZE 1
 # endif
 
-# define PENDING_BUFFER 4096
+# define PENDING_BUFFER 16384L
 
 // *** Functions *** //
 
