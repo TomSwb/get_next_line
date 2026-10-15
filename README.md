@@ -117,8 +117,6 @@ After launching the program, write some text and then press Enter. It will print
 
 ### AI:
 
-#### Before beginning of cursus
-
 ⚠️ Disclaimer: I only ask for actual answers/solutions when I realise that I am missing theoretical knowledge.
 
 e.g.: a new syntax or a new concept I had not explored previously.
@@ -149,7 +147,7 @@ I use VSCodium on purpose to not have AI integration. This means that, except fo
 
 ## Detailed description:
 
-#### Why this algorithm:
+### Why this algorithm:
 
 #### Both basic and bonus versions:
 
