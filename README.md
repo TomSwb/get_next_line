@@ -47,6 +47,10 @@ Create my own line-by-line reading function.
 * test2.txt
 * test3.txt
 
+Evaluation result:
+
+&nbsp;&nbsp;<img src="image.png" alt="succes" width="100">
+
 ## Instructions
 
 #### Libft version:
